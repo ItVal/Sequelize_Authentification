@@ -4,9 +4,9 @@ var router = express.Router();
 const Models = require('./../models');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 const User = Models.User;
-// dotenv.config();
+dotenv.config();
 
 
 /* GET users listing. */
@@ -34,10 +34,11 @@ router.post('/', async(req, res, next)=>{
 //login user
 router.post('/login',async(req,res,next)=>{
   const user = await User.findOne({ where : {email : req.body.email }});
+
   if(user){
      const password_valid = await bcrypt.compare(req.body.password,user.password);
      if(password_valid){
-         token = jwt.sign({ "id" : user.id,"email" : user.email,"first_name":user.first_name },process.env.SECRET);
+         token = jwt.sign({ "id" : user.id,"email" : user.email,"first_name":user.first_name }, process.env.KEY_TOKEN);
          res.status(200).json({ token : token });
      } else {
        res.status(400).json({ error : "Password Incorrect" });
