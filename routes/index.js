@@ -6,4 +6,4 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Authentification avec Sequelize' });
 });
 
-module.exports = router;
+export default  router;
