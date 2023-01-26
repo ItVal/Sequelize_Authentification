@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+const router = express.Router();
 
-const Models = require('./../models');
-const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-const User = Models.User;
+import user from './../models/user.js';
+import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+const User = user;
 dotenv.config();
 
 
@@ -71,4 +71,4 @@ router.get('/me',
  }); 
 
 
-module.exports = router;
+export default router;
